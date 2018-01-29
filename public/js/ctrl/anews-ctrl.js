@@ -5,7 +5,7 @@ app.controller('anews-ctrl', function($http){
 
 	// Model
 	anews.isLog = false;
-	anews.searcher = false;
+	anews.showSearcher = false;
 	anews.userData = {};
 	anews.links = [];
 

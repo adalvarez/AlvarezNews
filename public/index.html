@@ -25,14 +25,14 @@
 		<!-- Menu -->
 		<div class="w3-top">
 			<div class="w3-bar default-primary-color w3-text-white padding-side">
-				<a class="w3-bar-item w3-hover-none"> <img src="/img/logo.png" alt="Logo" height="25" width="25"> AlvarezNews</a>
+				<a class="w3-bar-item w3-hover-none"> <img src="/img/logo_white.png" alt="Logo" height="25" width="25"> AlvarezNews</a>
 				<a class="w3-bar-item w3-button bar-hover w3-bottombar w3-hover-border w3-hide-small">About</a>
 				<a class="w3-bar-item w3-button bar-hover w3-bottombar w3-hover-border">New Link</a>
 				<a class="w3-bar-item w3-button bar-hover w3-bottombar w3-hover-border w3-right w3-hide-small" ng-hide="anews.isLog" onclick="document.getElementById('sign').style.display='block'"><i class="fa fa-sign-in"></i></a>
 				<a class="w3-bar-item w3-button bar-hover w3-bottombar w3-hover-border w3-right w3-hide-small" ng-show="anews.isLog"><i class="fa fa-sign-out"></i></a>
-				<a class="w3-bar-item w3-hover-none w3-right w3-hide-small" ng-click="anews.searcher=!anews.searcher;"><i class="fa fa-search"></i></a>
-				<div id="search" class="w3-hide-small w3-animate-opacity" ng-show="anews.searcher">
-					<input class="w3-right  margin-search" type="text" name="search" placeholder="Search...">
+				<a class="w3-bar-item w3-hover-none w3-right w3-hide-small" ng-click="anews.showSearcher=!anews.showSearcher;"><i class="fa fa-search"></i></a>
+				<div id="search" class="w3-hide-small w3-animate-opacity" ng-show="anews.showSearcher">
+					<input class="w3-right  margin-search" type="text" name="search" placeholder="Search..." ng-model="anews.searcher">
 				</div>
 			</div>
 		</div>
@@ -40,7 +40,7 @@
 		
 		<div class="w3-container w3-padding-large links margin-side light-primary-color">
 			
-			<div class="link-container" ng-repeat="link in anews.links">
+			<div class="link-container" ng-repeat="link in anews.links | filter: anews.searcher">
 				<div>
 					<a class="link" ng-href="{{link.url}}" target="_blank"> {{link.description}} <span class="domain">{{link.url | domain}}</span></a>
 				</div>
