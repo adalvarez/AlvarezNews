@@ -1,0 +1,17 @@
+<div ng-controller="anews-ctrl as anews">
+	<div class="link-container" ng-repeat="link in anews.links | filter: index.searcher">
+		<div>
+			<a class="link" ng-href="{{link.url}}" target="_blank"> {{link.description}} <span class="domain">{{link.url | domain}}</span></a>
+		</div>
+		<div class="ground">
+			<i class="fa fa-calendar dark-primary-text-color"></i>
+			{{link.date}}
+			&emsp;
+			<i class="fa fa-user-o dark-primary-text-color"></i>
+			{{link.postedBy.name}}
+			&emsp;
+			<i class="fa fa-paper-plane dark-primary-text-color"></i>
+			<a class="link" ng-href="mailto:{{link.postedBy.email}}" target="_top">{{link.postedBy.email}}</a>
+		</div>
+	</div>
+</div>

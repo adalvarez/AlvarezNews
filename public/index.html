@@ -15,60 +15,44 @@
 		<link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
 		<!-- Angular.JS -->
 		<script src="/angular/angular.js"></script>
+		<script src="/angular-route/angular-route.js"></script>
+		<!-- JavaScript -->
 		<script src="/js/module.js"></script>
+		<script src="/js/router.js"></script>
 		<script src="/js/ctrl/queries-graphql.js"></script>
 		<script src="/js/ctrl/anews-ctrl.js"></script>
+		<script src="/js/ctrl/index-ctrl.js"></script>
 		<script src="/js/filters/domain-fltr.js"></script>
 	</head>
-	<body ng-controller="anews-ctrl as anews">
+	<body ng-controller="index-ctrl as index">
 		
 		<!-- Menu -->
 		<div class="w3-top">
 			<div class="w3-bar default-primary-color w3-text-white padding-side">
-				<a class="w3-bar-item w3-hover-none"> <img src="/img/logo_white.png" alt="Logo" height="25" width="25"> AlvarezNews</a>
+				<a class="w3-bar-item w3-button bar-hover " ng-click="index.goANews()"> <img src="/img/logo_white.png" alt="Logo" height="25" width="25"> AlvarezNews</a>
 				<a class="w3-bar-item w3-button bar-hover w3-bottombar w3-hover-border w3-hide-small">About</a>
-				<a class="w3-bar-item w3-button bar-hover w3-bottombar w3-hover-border" ng-show="anews.isLog">New Link</a>
-				<a class="w3-bar-item w3-button bar-hover w3-bottombar w3-hover-border w3-right w3-hide-small" ng-hide="anews.isLog" onclick="document.getElementById('sign').style.display='block'"><i class="fa fa-sign-in"></i></a>
-				<a class="w3-bar-item w3-button bar-hover w3-bottombar w3-hover-border w3-right w3-hide-small" ng-show="anews.isLog" ng-click="anews.signOut()"><i class="fa fa-sign-out"></i></a>
-				<a class="w3-bar-item w3-hover-none w3-right w3-hide-small" ng-click="anews.showSearcher=!anews.showSearcher;"><i class="fa fa-search"></i></a>
-				<div id="search" class="w3-hide-small w3-animate-opacity" ng-show="anews.showSearcher">
-					<input class="w3-right  margin-search" type="text" name="search" placeholder="Search..." ng-model="anews.searcher">
+				<a class="w3-bar-item w3-button bar-hover w3-bottombar w3-hover-border" ng-show="index.isLog">New Link</a>
+				<a class="w3-bar-item w3-button bar-hover w3-bottombar w3-hover-border" ng-show="index.isLog">My Links</a>
+				<a class="w3-bar-item w3-button bar-hover w3-bottombar w3-hover-border w3-right w3-hide-small" ng-hide="index.isLog" onclick="document.getElementById('sign').style.display='block'"><i class="fa fa-sign-in"></i></a>
+				<a class="w3-bar-item w3-button bar-hover w3-bottombar w3-hover-border w3-right w3-hide-small" ng-show="index.isLog" ng-click="index.signOut()"><i class="fa fa-sign-out"></i></a>
+				<a class="w3-bar-item w3-hover-none w3-right w3-hide-small" ng-click="index.showSearcher=!index.showSearcher;"><i class="fa fa-search"></i></a>
+				<div id="search" class="w3-hide-small w3-animate-opacity" ng-show="index.showSearcher">
+					<input class="w3-right  margin-search" type="text" name="search" placeholder="Search..." ng-model="index.searcher">
 				</div>
 			</div>
 		</div>
 		
 		
 		<div class="w3-container w3-padding-large links margin-side light-primary-color">
-			
-			<div class="link-container" ng-repeat="link in anews.links | filter: anews.searcher">
-				<div>
-					<a class="link" ng-href="{{link.url}}" target="_blank"> {{link.description}} <span class="domain">{{link.url | domain}}</span></a>
-				</div>
-				<div class="ground">
-					<i class="fa fa-calendar dark-primary-text-color"></i>
-					{{link.date}}
-					&emsp;
-					<i class="fa fa-user-o dark-primary-text-color"></i>
-					{{link.postedBy.name}}
-					&emsp;
-					<i class="fa fa-paper-plane dark-primary-text-color"></i>
-					<a class="link" ng-href="mailto:{{link.postedBy.email}}" target="_top">{{link.postedBy.email}}</a>
-				</div>
+			<!-- For router -->
+			<div ng-view>
 			</div>
-
 		</div>
-		<footer class="dark-primary-color margin-side w3-text-white w3-center w3-padding-16">
-			<p>Adrián Álvarez Calderón</p>
-			<a href="https://github.com/adalvarez" target="_blank"><i class="fa fa-github w3-hover-opacity fa-2x"></i></a> &emsp;
-			<a href="https://www.linkedin.com/in/ajalvarezc/" target="_blank"><i class="fa fa-linkedin w3-hover-opacity fa-2x"></i></a> &emsp;
-			<a href="https://twitter.com/chapitro" target="_blank"><i class="fa fa-twitter w3-hover-opacity fa-2x"></i></a>
-		</footer>
 
 		<div id="sign" class="w3-modal">
 			<div class="w3-modal-content">
 				<span onclick="document.getElementById('sign').style.display='none'" class="w3-button w3-display-topright">&times;</span>
 				<br>
-
 				<div class="w3-container padding-side-modal">
 					<div class="w3-center">
 						<img src="/img/logo.png" alt="Logo" height="36" width="36">
@@ -76,25 +60,30 @@
 					</div>
 
 					<h3>Sign in</h3>
-					<input type="email" placeholder="Email" ng-model="anews.logEmail" required>
-					<input type="password" placeholder="Password" ng-model="anews.logPassword" required>
+					<input type="email" placeholder="Email" ng-model="index.logEmail" required>
+					<input type="password" placeholder="Password" ng-model="index.logPassword" required>
 					<div class="w3-center">
-						<button class="w3-button dark-primary-color w3-round w3-text-white sign-hover" onclick="document.getElementById('sign').style.display='none'" ng-click="anews.signin()">Sign in</button>
+						<button class="w3-button dark-primary-color w3-round w3-text-white sign-hover" onclick="document.getElementById('sign').style.display='none'" ng-click="index.signin()">Sign in</button>
 					</div>
 
 					<h3>Sign up</h3>
-					<input type="text" placeholder="Name" ng-model="anews.signName" required>
-					<input type="email" placeholder="Email" ng-model="anews.signEmail" required>
-					<input type="password" placeholder="Password" ng-model="anews.signPassword" required>
+					<input type="text" placeholder="Name" ng-model="index.signName" required>
+					<input type="email" placeholder="Email" ng-model="index.signEmail" required>
+					<input type="password" placeholder="Password" ng-model="index.signPassword" required>
 					<div class="w3-center">
-						<button class="w3-button dark-primary-color w3-round w3-text-white sign-hover" onclick="document.getElementById('sign').style.display='none'" ng-click="anews.signup()">Sign up</button>
+						<button class="w3-button dark-primary-color w3-round w3-text-white sign-hover" onclick="document.getElementById('sign').style.display='none'" ng-click="index.signup()">Sign up</button>
 					</div>
-
 				</div>
-
 				<br>
-
 			</div>
 		</div>
+
+		<footer class="dark-primary-color margin-side w3-text-white w3-center w3-padding-16">
+			<p>Adrián Álvarez Calderón</p>
+			<a href="https://github.com/adalvarez" target="_blank"><i class="fa fa-github w3-hover-opacity fa-2x"></i></a> &emsp;
+			<a href="https://www.linkedin.com/in/ajalvarezc/" target="_blank"><i class="fa fa-linkedin w3-hover-opacity fa-2x"></i></a> &emsp;
+			<a href="https://twitter.com/chapitro" target="_blank"><i class="fa fa-twitter w3-hover-opacity fa-2x"></i></a>
+		</footer>
+
 	</body>
 </html>
