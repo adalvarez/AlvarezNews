@@ -63,7 +63,7 @@ var GraphQL = {
 					createLink(link:{
 						url: "${url}"
 						description: "${description}"
-						postedBy: "${postedBy}"
+						postedBy: ${postedBy}
 					}){
 						id
 					}
@@ -74,7 +74,7 @@ var GraphQL = {
 			return `
 				mutation{
 					updateLink(link:{
-						id: "${id}"
+						id: ${id}
 						url: "${url}"
 						description: "${description}"
 					}){
@@ -86,7 +86,7 @@ var GraphQL = {
 		deleteLink: (id)=>{
 			return `
 				mutation{
-					deleteLink(id:"${id}"){
+					deleteLink(id:${id}){
 						id
 					}
 				}

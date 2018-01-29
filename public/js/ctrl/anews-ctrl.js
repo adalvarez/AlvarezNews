@@ -16,7 +16,6 @@ app.controller('anews-ctrl', function($http, $window){
 			});
 	}
 
-
 	anews.loadLinks();
 
 })

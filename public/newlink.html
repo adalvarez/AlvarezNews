@@ -1,0 +1,18 @@
+<div ng-controller="newLink-ctrl as newLink">
+	<div class="w3-margin-top w3-container padding-side margin-side">
+		<div class="padding-side margin-side">
+			<label >URL</label>
+			<input class="w3-input w3-border w3-section" type="text" required ng-model="newLink.link.url">
+			<label >Description</label>
+			<textarea class="w3-input w3-border w3-section" style="resize:none" ng-model="newLink.link.description"></textarea>
+			
+			<div class="w3-center w3-padding-16 ">
+				<button class="w3-btn w3-blue-grey" ng-click="newLink.sendLink()">Post Link</button>
+			</div>
+			<div class="w3-panel w3-pale-green w3-animate-opacity " ng-show="newLink.created">
+				<h4>Link created</h4>
+				<p ng-click="newLink.goMyLinks()">Do you want to see your links?</p>
+			</div>
+		</div>
+	</div>
+</div>

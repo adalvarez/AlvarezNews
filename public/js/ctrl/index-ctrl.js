@@ -7,6 +7,7 @@ app.controller('index-ctrl', function($http, $window, $location){
 	index.isLog = false;
 	index.showSearcher = false;
 	index.userData = {};
+	index.currentSection = 0;
 
 	index.signin = ()=>{
 
@@ -60,10 +61,17 @@ app.controller('index-ctrl', function($http, $window, $location){
 
 	index.goANews = ()=>{
 		$location.path('links');
+		index.currentSection = 0;
 	}
 
 	index.goAbout = ()=>{
 		$location.path('about');
+		index.currentSection = 1;
+	}
+
+	index.goNewLink = ()=>{
+		$location.path('newLink');
+		index.currentSection = 2;
 	}
 
 });

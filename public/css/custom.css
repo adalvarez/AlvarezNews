@@ -124,3 +124,11 @@
 .button-contact:hover, a-contact:hover, .a-u:hover {
 	opacity: 0.7;
 }
+
+.active{
+	border-color:#9E9E9E!important;
+}
+
+.w3-btn:hover {
+	box-shadow: 0 0px 8px 0 rgba(0,0,0,0.2), 0 0px 8px 0 rgba(0,0,0,0.19);
+}

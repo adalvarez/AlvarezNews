@@ -34,8 +34,7 @@ app.use(
 		schema: schema,
 		formatError: (error)=>{
 			return {
-				message: error.message,
-				path: error.path[0]
+				message: error.message
 			}
 		}
 	})
