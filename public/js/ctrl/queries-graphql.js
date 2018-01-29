@@ -2,7 +2,21 @@
 
 var GraphQL = {
 	queries:{
-
+		allLinks: ()=>{
+			return `
+				{
+					allLinks{
+						url
+						description
+						date
+						postedBy{
+							name
+							email
+						}
+					}
+				}
+			`;
+		}
 	},
 	mutations:{
 		logIn: (email, password)=>{

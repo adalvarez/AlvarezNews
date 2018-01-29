@@ -5,7 +5,9 @@ app.controller('anews-ctrl', function($http){
 
 	// Model
 	anews.isLog = false;
+	anews.searcher = false;
 	anews.userData = {};
+	anews.links = [];
 
 	anews.signin = ()=>{
 
@@ -51,6 +53,20 @@ app.controller('anews-ctrl', function($http){
 				anews.signName = anews.signEmail = anews.signPassword = "";
 
 			});
-
 	}
+
+	anews.loadLinks = ()=>{
+		$http.post("/graphql",
+			{
+				query: GraphQL.queries.allLinks()
+			})
+			.then((respuesta)=> {
+				let data = respuesta.data;
+				anews.links = data.data.allLinks;
+			});
+	}
+
+
+	anews.loadLinks();
+
 })

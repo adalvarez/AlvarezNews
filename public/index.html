@@ -18,6 +18,7 @@
 		<script src="/js/module.js"></script>
 		<script src="/js/ctrl/queries-graphql.js"></script>
 		<script src="/js/ctrl/anews-ctrl.js"></script>
+		<script src="/js/filters/domain-fltr.js"></script>
 	</head>
 	<body ng-controller="anews-ctrl as anews">
 		
@@ -29,8 +30,8 @@
 				<a class="w3-bar-item w3-button bar-hover w3-bottombar w3-hover-border">New Link</a>
 				<a class="w3-bar-item w3-button bar-hover w3-bottombar w3-hover-border w3-right w3-hide-small" ng-hide="anews.isLog" onclick="document.getElementById('sign').style.display='block'"><i class="fa fa-sign-in"></i></a>
 				<a class="w3-bar-item w3-button bar-hover w3-bottombar w3-hover-border w3-right w3-hide-small" ng-show="anews.isLog"><i class="fa fa-sign-out"></i></a>
-				<a class="w3-bar-item w3-hover-none w3-right w3-hide-small" onclick="document.getElementById('search').style.display='block'"><i class="fa fa-search"></i></a>
-				<div id="search" class="w3-hide-small w3-animate-opacity">
+				<a class="w3-bar-item w3-hover-none w3-right w3-hide-small" ng-click="anews.searcher=!anews.searcher;"><i class="fa fa-search"></i></a>
+				<div id="search" class="w3-hide-small w3-animate-opacity" ng-show="anews.searcher">
 					<input class="w3-right  margin-search" type="text" name="search" placeholder="Search...">
 				</div>
 			</div>
@@ -39,52 +40,19 @@
 		
 		<div class="w3-container w3-padding-large links margin-side light-primary-color">
 			
-			<div class="link-container">
+			<div class="link-container" ng-repeat="link in anews.links">
 				<div>
-					<a class="link" href="https://www.google.com" target="_blank"> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt maiores sunt blanditiis, omnis sit vel alias quo pariatur ea iste!. <span class="domain">google.com</span></a>
+					<a class="link" ng-href="{{link.url}}" target="_blank"> {{link.description}} <span class="domain">{{link.url | domain}}</span></a>
 				</div>
 				<div class="ground">
 					<i class="fa fa-calendar dark-primary-text-color"></i>
-					01/28/2017 10:00:00
+					{{link.date}}
 					&emsp;
 					<i class="fa fa-user-o dark-primary-text-color"></i>
-					Adrián Álvarez Calderón
-				</div>
-			</div>
-			<div class="link-container">
-				<div>
-					<a class="link" href="https://www.google.com" target="_blank"> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt maiores sunt blanditiis, omnis sit vel alias quo pariatur ea iste!. <span class="domain">google.com</span></a>
-				</div>
-				<div class="ground">
-					<i class="fa fa-calendar dark-primary-text-color"></i>
-					01/28/2017 10:00:00
+					{{link.postedBy.name}}
 					&emsp;
-					<i class="fa fa-user-o dark-primary-text-color"></i>
-					Adrián Álvarez Calderón
-				</div>
-			</div>
-			<div class="link-container">
-				<div>
-					<a class="link" href="https://www.google.com" target="_blank"> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt maiores sunt blanditiis, omnis sit vel alias quo pariatur ea iste!. <span class="domain">google.com</span></a>
-				</div>
-				<div class="ground">
-					<i class="fa fa-calendar dark-primary-text-color"></i>
-					01/28/2017 10:00:00
-					&emsp;
-					<i class="fa fa-user-o dark-primary-text-color"></i>
-					Adrián Álvarez Calderón
-				</div>
-			</div>
-			<div class="link-container">
-				<div>
-					<a class="link" href="https://www.google.com" target="_blank"> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt maiores sunt blanditiis, omnis sit vel alias quo pariatur ea iste!. <span class="domain">google.com</span></a>
-				</div>
-				<div class="ground">
-					<i class="fa fa-calendar dark-primary-text-color"></i>
-					01/28/2017 10:00:00
-					&emsp;
-					<i class="fa fa-user-o dark-primary-text-color"></i>
-					Adrián Álvarez Calderón
+					<i class="fa fa-paper-plane dark-primary-text-color"></i>
+					<a class="link" ng-href="mailto:{{link.postedBy.email}}" target="_top">{{link.postedBy.email}}</a>
 				</div>
 			</div>
 
