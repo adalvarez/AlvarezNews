@@ -22,6 +22,7 @@
 		<script src="/js/ctrl/queries-graphql.js"></script>
 		<script src="/js/ctrl/anews-ctrl.js"></script>
 		<script src="/js/ctrl/newlink-ctrl.js"></script>
+		<script src="/js/ctrl/mylinks-ctrl.js"></script>
 		<script src="/js/ctrl/index-ctrl.js"></script>
 		<script src="/js/filters/domain-fltr.js"></script>
 	</head>
@@ -33,7 +34,7 @@
 				<a class="w3-bar-item w3-button bar-hover " ng-click="index.goANews()"> <img src="/img/logo_white.png" alt="Logo" height="25" width="25"> AlvarezNews</a>
 				<a class="w3-bar-item w3-button bar-hover w3-bottombar w3-hover-border w3-hide-small" ng-class="(index.currentSection == 1)?'active':''" ng-click="index.goAbout()">About</a>
 				<a class="w3-bar-item w3-button bar-hover w3-bottombar w3-hover-border" ng-class="(index.currentSection == 2)?'active':''" ng-show="index.isLog" ng-click="index.goNewLink()">New Link</a>
-				<a class="w3-bar-item w3-button bar-hover w3-bottombar w3-hover-border" ng-class="(index.currentSection == 3)?'active':''" ng-show="index.isLog">My Links</a>
+				<a class="w3-bar-item w3-button bar-hover w3-bottombar w3-hover-border" ng-class="(index.currentSection == 3)?'active':''" ng-show="index.isLog" ng-click="index.goMyLinks()">My Links</a>
 				<a class="w3-bar-item w3-button bar-hover w3-bottombar w3-hover-border w3-right w3-hide-small" ng-hide="index.isLog" onclick="document.getElementById('sign').style.display='block'"><i class="fa fa-sign-in"></i></a>
 				<a class="w3-bar-item w3-button bar-hover w3-bottombar w3-hover-border w3-right w3-hide-small" ng-show="index.isLog" ng-click="index.signOut()"><i class="fa fa-sign-out"></i></a>
 				<a class="w3-bar-item w3-hover-none w3-right w3-hide-small" ng-click="index.showSearcher=!index.showSearcher;"><i class="fa fa-search"></i></a>

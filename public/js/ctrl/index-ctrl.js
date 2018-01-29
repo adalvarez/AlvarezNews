@@ -74,4 +74,8 @@ app.controller('index-ctrl', function($http, $window, $location){
 		index.currentSection = 2;
 	}
 
+	index.goMyLinks = ()=>{
+		$location.path('myLinks');
+		index.currentSection = 3;
+	}
 });
