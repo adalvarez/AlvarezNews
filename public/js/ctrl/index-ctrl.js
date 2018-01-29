@@ -62,4 +62,8 @@ app.controller('index-ctrl', function($http, $window, $location){
 		$location.path('links');
 	}
 
+	index.goAbout = ()=>{
+		$location.path('about');
+	}
+
 });
