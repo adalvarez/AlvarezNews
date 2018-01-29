@@ -36,7 +36,7 @@ module.exports = class UserCtrl{
 	 * @return Promise
 	 */
 	static signUp(newUser){
-		newUser.password = CryptoJS.AES.encrypt(newUser.email, newUser.password);
+		newUser.password = CryptoJS.AES.encrypt(newUser.email, newUser.password).toString();
 
 		return User.query()
 			.where('email', newUser.email)

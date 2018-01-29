@@ -1,6 +1,6 @@
 var app = angular.module('ANews');
 
-app.controller('anews-ctrl', function($http){
+app.controller('anews-ctrl', function($http, $window){
 	let anews = this;
 
 	// Model
@@ -53,6 +53,10 @@ app.controller('anews-ctrl', function($http){
 				anews.signName = anews.signEmail = anews.signPassword = "";
 
 			});
+	}
+
+	anews.signOut = ()=>{
+		$window.location.reload();
 	}
 
 	anews.loadLinks = ()=>{
