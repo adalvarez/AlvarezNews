@@ -1,0 +1,22 @@
+{
+  "name": "alvareznews",
+  "homepage": "https://github.com/adalvarez/AlvarezNews",
+  "authors": [
+    "Adrián Álvarez Calderón <adrianalvarezcalderon@gmail.com>"
+  ],
+  "description": "This repository is the result of the acquired knowledge in GraphQL, and is a web page like HackerNews.",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.6.7",
+    "components-font-awesome": "^4.7.0"
+  }
+}

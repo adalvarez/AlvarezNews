@@ -1,0 +1,55 @@
+{
+  "name": "alvareznews",
+  "version": "0.0.0",
+  "description": "This repository is the result of the acquired knowledge in GraphQL, and is a web page like HackerNews.",
+  "contributors": [
+    {
+      "name": "Adrián Álvarez Calderón",
+      "email": "adrianalvarezcalderon@gmail.com"
+    }
+  ],
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "production": "pm2 start server.js",
+    "release": "pm2 restart server.js",
+    "dev": "nodemon server.js",
+    "deploy": "rm -f db/db.sqlite && knex migrate:latest --knexfile=db/knexfile.js && knex seed:run --knexfile=db/knexfile.js",
+    "db:migrate": "knex migrate:latest --knexfile=db/knexfile.js",
+    "db:seed": "knex seed:run --knexfile=db/knexfile.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adalvarez/AlvarezNews.git"
+  },
+  "keywords": [
+    "graphql",
+    "nodejs",
+    "bootstrap",
+    "angularjs"
+  ],
+  "author": "Adrián Álvarez Calderón",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adalvarez/AlvarezNews/issues"
+  },
+  "homepage": "https://github.com/adalvarez/AlvarezNews#readme",
+  "dependencies": {
+    "apollo-server-express": "^1.3.2",
+    "body-parser": "^1.18.2",
+    "crypto-js": "^3.1.9-1",
+    "date-fns": "^1.29.0",
+    "express": "^4.16.2",
+    "graphql": "^0.12.3",
+    "graphql-tools": "^2.19.0",
+    "knex": "^0.14.2",
+    "objection": "^0.9.4",
+    "path": "^0.12.7",
+    "pm2": "^2.9.3",
+    "sqlite3": "^3.1.13"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.11"
+  }
+}
