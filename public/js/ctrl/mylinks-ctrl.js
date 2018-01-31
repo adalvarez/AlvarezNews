@@ -25,8 +25,9 @@ app.controller('myLinks-ctrl', function($http, $location, $scope){
 				query: GraphQL.mutations.deleteLink(link.id)
 			})
 			.then((respuesta)=> {
+				// This action remove the local link, 
+				// this link is a reference to all the links (in main section)
 				findAndRemove(myLinks.links,'id', link.id);
-				findAndRemove(parent.links,'id', link.id);
 			});
 	}
 
