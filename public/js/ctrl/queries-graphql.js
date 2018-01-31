@@ -6,6 +6,7 @@ var GraphQL = {
 			return `
 				{
 					allLinks{
+						id
 						url
 						description
 						date
@@ -30,6 +31,7 @@ var GraphQL = {
 						name
 						email
 						links{
+							id
 							url
 							description
 							date

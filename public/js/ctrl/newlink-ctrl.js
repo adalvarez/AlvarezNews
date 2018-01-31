@@ -1,6 +1,6 @@
 var app = angular.module('ANews');
 
-app.controller('newLink-ctrl', function($http, $location, $scope){
+app.controller('newLink-ctrl', function($http, $location, $scope, $timeout){
 	let parent = $scope.$parent.$parent.index;
 
 	if(!parent.isLog){
@@ -12,7 +12,7 @@ app.controller('newLink-ctrl', function($http, $location, $scope){
 	newLink.created = false;
 
 	newLink.sendLink = ()=>{
-		GraphQL.mutations.createLink(newLink.link.url, newLink.link.description, parent.userData.id)
+		
 		$http.post("/graphql",
 			{
 				query: GraphQL.mutations.createLink(newLink.link.url, newLink.link.description, parent.userData.id)
@@ -22,6 +22,9 @@ app.controller('newLink-ctrl', function($http, $location, $scope){
 
 				if(data.errors === undefined){
 					newLink.created = true;
+					$timeout(()=>{
+						newLink.created = false;
+					},2500);
 				}
 				else{
 					newLink.created = false;
@@ -34,7 +37,8 @@ app.controller('newLink-ctrl', function($http, $location, $scope){
 	}
 
 	newLink.goMyLinks = ()=>{
-		$location.path('links');
+		$location.path('myLinks');
+		parent.currentSection = 3;
 	}
 
 })
