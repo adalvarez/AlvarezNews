@@ -1,8 +1,7 @@
 'use strict';
 
 const 
-	Link = require('../models/Link'),
-	User = require('../models/User'),
+	Models = require('../models/'),
 	format = require('date-fns/format');
 
 module.exports = class LinkCtrl{
@@ -15,15 +14,18 @@ module.exports = class LinkCtrl{
 	 */
 	static createLink(newLink){
 		newLink.date = format(new Date(), 'MM/DD/YYYY HH:mm:ss');
-		return User.query()
-			.findById(newLink.postedBy)
-			.then((user) => {
-				if (user === undefined) {
-					throw new Error('User not found')
-				}else {
-					return Link.query().eager('postedBy').insert(newLink);
-				}
-			});
+		return Models.users.findAll({
+			where:{
+				id: newLink.userId
+			}
+		}).then((users)=>{
+			let user = users[0];
+			if (user === undefined) {
+				throw new Error('User not found')
+			}else {
+				return Models.links.create(newLink);
+			}
+		});
 	}
 
 	/**
@@ -31,19 +33,29 @@ module.exports = class LinkCtrl{
 	 * @return Promise
 	 */
 	static updateLink(updateLink){
-		return Link.query().eager('postedBy').patchAndFetchById(updateLink.id, updateLink);
+		return Models.links.update(updateLink,{
+			where:{
+				id: updateLink.id
+			}
+		}).then(()=>{
+			return Models.links.findById(updateLink.id);
+		});
 	}
 
 	/**
-	 * @param updateLink: 
+	 * @param id: Id link to delete
 	 * @return Promise
 	 */
 	static deleteLinks(id){
 		let link = null;
-		return Link.query().eager('postedBy').findById(id)
+		return Models.links.findById(id)
 			.then((_link)=>{
 				link = _link;
-				return Link.query().deleteById(id)
+				return Models.links.destroy({
+					where:{
+						id:id
+					}
+				})
 			})
 			.then(()=>{
 				return link;
@@ -51,6 +63,10 @@ module.exports = class LinkCtrl{
 	}
 
 	static getLinks(){
-		return Link.query().eager('postedBy');
+		return Models.links.findAll({
+			include: [
+				{model: Models.users}
+			]
+		});
 	}
 }

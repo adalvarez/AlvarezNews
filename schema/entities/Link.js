@@ -12,7 +12,7 @@ type Link{
 	# Date of posted
 	date: String!
 	# User who posted
-	postedBy: User!
+	user: User!
 }
 
 input newLink{
@@ -21,7 +21,7 @@ input newLink{
 	# Summary of Link
 	description: String!
 	# Identifier of the User
-	postedBy: Int!
+	userId: Int!
 }
 
 input updateLink{

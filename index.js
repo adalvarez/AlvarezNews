@@ -9,7 +9,7 @@ const
 
 // Local Modules
 const schema = require('./schema/main');
-require('./db/setup');
+const Models = require('./models/');
 
 // Constants
 const PORT = 8040;
@@ -53,7 +53,9 @@ app.get('/', function(req, res)
 	res.sendFile(__dirname + '/public/index.html');
 });
 
-// Run server
-app.listen(PORT, ()=>{
-	console.log(`Listen http://localhost:${PORT}`);
+Models.sequelize.sync().then(() => {
+	// Run server
+	app.listen(PORT, ()=>{
+		console.log(`Listen http://localhost:${PORT}`);
+	});
 });

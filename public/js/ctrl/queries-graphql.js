@@ -10,7 +10,7 @@ var GraphQL = {
 						url
 						description
 						date
-						postedBy{
+						user{
 							name
 							email
 						}
@@ -59,15 +59,18 @@ var GraphQL = {
 				}
 			`;
 		},
-		createLink: (url, description, postedBy)=>{
+		createLink: (url, description, userId)=>{
 			return `
 				mutation{
 					createLink(link:{
 						url: "${url}"
 						description: "${description}"
-						postedBy: ${postedBy}
+						userId: ${userId}
 					}){
 						id
+						url
+						description
+						date
 					}
 				}
 			`;

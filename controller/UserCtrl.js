@@ -1,7 +1,8 @@
 'use strict';
 
 const 
-	User = require('../models/User'),
+	// User = require('../models/User'),
+	Models = require('../models/'),
 	CryptoJS = require("crypto-js");
 
 module.exports = class UserCtrl{
@@ -13,22 +14,25 @@ module.exports = class UserCtrl{
 	 * @return Promise
 	 */
 	static logIn(logUser){
-		return User.query()
-			.eager('links')
-			.where('email', logUser.email)
-			.then((users)=>{
-				let user = users[0];
-
-				try{
-					let passDB  = CryptoJS.AES.decrypt(user.password, logUser.password).toString(CryptoJS.enc.Utf8);
-					if(passDB === logUser.email){
-						return user;
-					}
+		return Models.users.findAll({
+			where:{
+				email:logUser.email
+			},
+			include: [
+				{model: Models.links}
+			]
+		}).then((users)=>{
+			let user = users[0];
+			try{
+				let passDB  = CryptoJS.AES.decrypt(user.password, logUser.password).toString(CryptoJS.enc.Utf8);
+				if(passDB === logUser.email){
+					return user;
 				}
-				catch(e){
-				}
-				throw new Error('Wrong login');
-			});
+			}
+			catch(e){
+			}
+			throw new Error('Wrong login');
+		});
 	}
 
 	/**
@@ -38,22 +42,27 @@ module.exports = class UserCtrl{
 	static signUp(newUser){
 		newUser.password = CryptoJS.AES.encrypt(newUser.email, newUser.password).toString();
 
-		return User.query()
-			.where('email', newUser.email)
-			.then((users)=>{
-				if(users.length === 0){
-					return User.query().eager('links').insert(newUser);
-				}
-				else{
-					throw new Error('Email is already registered');
-				}
-			});
+		return Models.users.findAll({
+			where:{
+				email:newUser.email
+			}
+		}).then((users)=>{
+			if(users.length === 0){
+				return Models.users.create(newUser);
+			}else{
+				throw new Error('Email is already registered');
+			}
+		});
 	}
 
 	/**
 	 * @return Promise
 	 */
 	static getUsers(){
-		return User.query().eager('links');
+		return Models.users.findAll({
+			include: [
+				{model: Models.links}
+			]
+		});
 	}
 }
