@@ -1,7 +1,8 @@
 <div ng-controller="myLinks-ctrl as myLinks">
-	<div class="link-container" ng-repeat="link in myLinks.links | filter: index.searcher">
+	<div class="link-container" ng-repeat="link in myLinks.userData.links | filter: index.searcher">
 		<div>
-			<i class="fa fa-trash" aria-hidden="true" ng-click="myLinks.deleteLink(link)"></i>
+			<i class="fa fa-trash dark-primary-text-color" aria-hidden="true" ng-click="myLinks.deleteLink(link)"></i>
+			<i class="fa fa-edit dark-primary-text-color" aria-hidden="true"></i>
 			<a class="link" ng-href="{{link.url}}" target="_blank"> {{link.description}} <span class="domain">{{link.url | domain}}</span></a>
 		</div>
 		<div class="ground">

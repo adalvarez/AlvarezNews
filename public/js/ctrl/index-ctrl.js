@@ -1,13 +1,13 @@
 var app = angular.module('ANews');
 
-app.controller('index-ctrl', function($http, $window, $location){
+app.controller('index-ctrl', function($http, $window, $location, linksFactory){
 	let index = this;
 
 	// Model
-	index.isLog = false;
+	index.isLog = linksFactory.getIsLog();
 	index.showSearcher = false;
-	index.userData = {};
-	index.currentSection = 0;
+	index.userData = linksFactory.getUserData();
+	index.currentSection = linksFactory.getCurrentSection();
 
 	index.signin = ()=>{
 
@@ -19,11 +19,11 @@ app.controller('index-ctrl', function($http, $window, $location){
 				let data = respuesta.data;
 
 				if(data.errors === undefined){
-					index.userData = data.data.logIn;
-					index.isLog = true;
+					index.userData = linksFactory.setUserData(data.data.logIn);
+					index.isLog = linksFactory.setIsLog(true);
 				}
 				else{
-					index.isLog = false;
+					index.isLog = linksFactory.setIsLog(false);
 					console.error(data.errors[0].message);
 				}
 
@@ -42,11 +42,11 @@ app.controller('index-ctrl', function($http, $window, $location){
 				let data = respuesta.data;
 
 				if(data.errors === undefined){
-					index.userData = data.data.logIn;
-					index.isLog = true;
+					index.userData = linksFactory.setUserData(data.data.logIn);
+					index.isLog = linksFactory.setIsLog(true);
 				}
 				else{
-					index.isLog = false;
+					index.isLog = linksFactory.setIsLog(false);
 					console.error(data.errors[0].message);
 				}
 
@@ -61,21 +61,21 @@ app.controller('index-ctrl', function($http, $window, $location){
 
 	index.goANews = ()=>{
 		$location.path('links');
-		index.currentSection = 0;
+		index.currentSection = linksFactory.setCurrentSection(0);
 	}
 
 	index.goAbout = ()=>{
 		$location.path('about');
-		index.currentSection = 1;
+		index.currentSection = linksFactory.setCurrentSection(1);
 	}
 
 	index.goNewLink = ()=>{
 		$location.path('newLink');
-		index.currentSection = 2;
+		index.currentSection = linksFactory.setCurrentSection(2);
 	}
 
 	index.goMyLinks = ()=>{
 		$location.path('myLinks');
-		index.currentSection = 3;
+		index.currentSection = linksFactory.setCurrentSection(3);
 	}
 });

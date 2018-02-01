@@ -1,15 +1,13 @@
 var app = angular.module('ANews');
 
-app.controller('myLinks-ctrl', function($http, $location, $scope){
-	let parent = $scope.$parent.$parent.index;
+app.controller('myLinks-ctrl', function($http, $location, $scope, linksFactory){
 
-	if(!parent.isLog){
+	if(!linksFactory.getIsLog()){
 		$location.path('links');
 	}
 
 	let myLinks = this;
-	myLinks.links = parent.userData.links;
-	myLinks.userData = parent.userData;
+	myLinks.userData = linksFactory.getUserData();
 
 	function findAndRemove(array, property, value) {
 		array.forEach(function(result, index) {
@@ -25,9 +23,8 @@ app.controller('myLinks-ctrl', function($http, $location, $scope){
 				query: GraphQL.mutations.deleteLink(link.id)
 			})
 			.then((respuesta)=> {
-				// This action remove the local link, 
-				// this link is a reference to all the links (in main section)
-				findAndRemove(myLinks.links,'id', link.id);
+				findAndRemove(myLinks.userData.links,'id', link.id);
+				myLinks.userData = linksFactory.setUserData(myLinks.userData);
 			});
 	}
 
