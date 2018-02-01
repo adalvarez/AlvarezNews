@@ -137,3 +137,32 @@
 	width: 95%;
 	font-size: 12px;
 }
+
+.valid-input {
+	outline: 0;
+	border-width: 0 0 2px 0;
+}
+.valid-input:invalid {
+	border-color: #f97a7a;
+}
+
+.error{
+	color: #f97a7a;
+	font-weight: bold;
+	font-size: 14px;
+	padding-top: 0.7em;
+}
+
+.alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+
+.ui-on{
+	display: block;
+}
+.ui-off{
+	display: none;
+}

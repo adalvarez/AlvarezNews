@@ -48,7 +48,11 @@ module.exports = class UserCtrl{
 			}
 		}).then((users)=>{
 			if(users.length === 0){
-				return Models.users.create(newUser);
+				return Models.users.create(newUser)
+					.then((user)=>{
+						user.links=[];
+						return user;
+					});
 			}else{
 				throw new Error('Email is already registered');
 			}

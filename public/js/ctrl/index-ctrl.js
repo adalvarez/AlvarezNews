@@ -1,6 +1,6 @@
 var app = angular.module('ANews');
 
-app.controller('index-ctrl', function($http, $window, $location, linksFactory){
+app.controller('index-ctrl', function($http, $window, $location, $timeout, linksFactory){
 	let index = this;
 
 	// Model
@@ -8,6 +8,10 @@ app.controller('index-ctrl', function($http, $window, $location, linksFactory){
 	index.showSearcher = false;
 	index.userData = linksFactory.getUserData();
 	index.currentSection = linksFactory.getCurrentSection();
+	index.modal = false;
+	index.signUpError = index.signInError = false;
+	index.logEmail = index.logPassword = "";
+	index.signName = index.signEmail = index.signPassword = "";
 
 	index.signin = ()=>{
 
@@ -21,10 +25,17 @@ app.controller('index-ctrl', function($http, $window, $location, linksFactory){
 				if(data.errors === undefined){
 					index.userData = linksFactory.setUserData(data.data.logIn);
 					index.isLog = linksFactory.setIsLog(true);
+					index.modal = false;
 				}
 				else{
 					index.isLog = linksFactory.setIsLog(false);
 					console.error(data.errors[0].message);
+					index.signInErrorMessage = "Wrong LogIn*";
+					index.signInError = true;
+					$timeout(()=>{
+						index.signInError = false;
+					},2500);
+					index.modal = true;
 				}
 
 				index.logEmail = index.logPassword = "";
@@ -42,12 +53,19 @@ app.controller('index-ctrl', function($http, $window, $location, linksFactory){
 				let data = respuesta.data;
 
 				if(data.errors === undefined){
-					index.userData = linksFactory.setUserData(data.data.logIn);
+					index.userData = linksFactory.setUserData(data.data.signUp);
 					index.isLog = linksFactory.setIsLog(true);
+					index.modal = false;
 				}
 				else{
 					index.isLog = linksFactory.setIsLog(false);
 					console.error(data.errors[0].message);
+					index.signUpErrorMessage = "Email already exists*";
+					index.signUpError = true;
+					$timeout(()=>{
+						index.signUpError = false;
+					},2500);
+					index.modal = true;
 				}
 
 				index.signName = index.signEmail = index.signPassword = "";

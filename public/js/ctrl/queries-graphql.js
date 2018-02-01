@@ -48,9 +48,11 @@ var GraphQL = {
 						email: "${email}"
 						password: "${password}"
 					}){
+						id
 						name
 						email
-						links {
+						links{
+							id
 							url
 							description
 							date

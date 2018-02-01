@@ -36,7 +36,7 @@
 				<a class="w3-bar-item w3-button bar-hover w3-bottombar w3-hover-border w3-hide-small" ng-class="(index.currentSection == 1)?'active':''" ng-click="index.goAbout()">About</a>
 				<a class="w3-bar-item w3-button bar-hover w3-bottombar w3-hover-border" ng-class="(index.currentSection == 2)?'active':''" ng-show="index.isLog" ng-click="index.goNewLink()">New Link</a>
 				<a class="w3-bar-item w3-button bar-hover w3-bottombar w3-hover-border" ng-class="(index.currentSection == 3)?'active':''" ng-show="index.isLog" ng-click="index.goMyLinks()">My Links</a>
-				<a class="w3-bar-item w3-button bar-hover w3-bottombar w3-hover-border w3-right w3-hide-small" ng-hide="index.isLog" onclick="document.getElementById('sign').style.display='block'"><i class="fa fa-sign-in"></i></a>
+				<a class="w3-bar-item w3-button bar-hover w3-bottombar w3-hover-border w3-right w3-hide-small" ng-hide="index.isLog" ng-click="index.modal = true" ><i class="fa fa-sign-in"></i></a>
 				<a class="w3-bar-item w3-button bar-hover w3-bottombar w3-hover-border w3-right w3-hide-small" ng-show="index.isLog" ng-click="index.signOut()"><i class="fa fa-sign-out"></i></a>
 				<a class="w3-bar-item w3-hover-none w3-right w3-hide-small" ng-click="index.showSearcher=!index.showSearcher;"><i class="fa fa-search"></i></a>
 				<div id="search" class="w3-hide-small w3-animate-opacity" ng-show="index.showSearcher">
@@ -52,9 +52,9 @@
 			</div>
 		</div>
 
-		<div id="sign" class="w3-modal">
+		<div id="sign" class="w3-modal" ng-class="(index.modal)?'ui-on':'ui-off'">
 			<div class="w3-modal-content">
-				<span onclick="document.getElementById('sign').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+				<span ng-click="index.modal=false" class="w3-button w3-display-topright">&times;</span>
 				<br>
 				<div class="w3-container padding-side-modal">
 					<div class="w3-center">
@@ -62,20 +62,27 @@
 						<h4>Welcome</h4>
 					</div>
 
-					<h3>Sign in</h3>
-					<input type="email" placeholder="Email" ng-model="index.logEmail" required>
-					<input type="password" placeholder="Password" ng-model="index.logPassword" required>
-					<div class="w3-center">
-						<button class="w3-button dark-primary-color w3-round w3-text-white sign-hover" onclick="document.getElementById('sign').style.display='none'" ng-click="index.signin()">Sign in</button>
-					</div>
+					<form ng-submit="index.signin()">
+						<h3 class="alignleft">Sign in</h3>
+						<h3 class="alignright error" ng-show="index.signInError">{{index.signInErrorMessage}}</h3>
+						<input type="email" placeholder="Email" ng-model="index.logEmail" required>
+						<input type="password" placeholder="Password" ng-model="index.logPassword" required>
+						<div class="w3-center">
+							<button type="submit" class="w3-button dark-primary-color w3-round w3-text-white sign-hover">Sign in</button>
+						</div>
+					</form>
 
-					<h3>Sign up</h3>
-					<input type="text" placeholder="Name" ng-model="index.signName" required>
-					<input type="email" placeholder="Email" ng-model="index.signEmail" required>
-					<input type="password" placeholder="Password" ng-model="index.signPassword" required>
-					<div class="w3-center">
-						<button class="w3-button dark-primary-color w3-round w3-text-white sign-hover" onclick="document.getElementById('sign').style.display='none'" ng-click="index.signup()">Sign up</button>
-					</div>
+					<form ng-submit="index.signup()">
+						<h3 class="alignleft">Sign up</h3>
+						<h3 class="alignright error" ng-show="index.signUpError">{{index.signUpErrorMessage}}</h3>
+						<input type="text" placeholder="Name" ng-model="index.signName" required>
+						<input type="email" placeholder="Email" ng-model="index.signEmail" required>
+						<input type="password" placeholder="Password" ng-model="index.signPassword" required>
+						<div class="w3-center">
+							<button class="w3-button dark-primary-color w3-round w3-text-white sign-hover">Sign up</button>
+						</div>
+					</form>
+
 				</div>
 				<br>
 			</div>
