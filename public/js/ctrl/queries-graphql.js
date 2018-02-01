@@ -84,6 +84,9 @@ var GraphQL = {
 						description: "${description}"
 					}){
 						id
+						url
+						description
+						date
 					}
 				}
 			`;

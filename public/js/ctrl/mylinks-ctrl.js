@@ -28,4 +28,27 @@ app.controller('myLinks-ctrl', function($http, $location, $scope, linksFactory){
 			});
 	}
 
+	myLinks.edit = (event, link)=>{
+		if((window.event ? event.keyCode : event.which) === 13){ // Enter
+			$http.post("/graphql",
+				{
+					query: GraphQL.mutations.updateLink(link.id, link.url, link.description)
+				})
+				.then((respuesta)=> {
+					let data = respuesta.data;
+					if(data.errors === undefined){
+						let tempUserData = linksFactory.getUserData();
+						tempUserData.links.forEach((_link)=>{
+							if(_link.id===link.id){
+								_link.url = link.url;
+								_link.description = link.description;
+							}
+						})
+						linksFactory.setUserData(tempUserData);
+						link.edit = !link.edit;
+					}
+				});
+		}
+	}
+
 })

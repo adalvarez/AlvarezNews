@@ -132,3 +132,8 @@
 .w3-btn:hover {
 	box-shadow: 0 0px 8px 0 rgba(0,0,0,0.2), 0 0px 8px 0 rgba(0,0,0,0.19);
 }
+
+.edit-link{
+	width: 95%;
+	font-size: 12px;
+}
