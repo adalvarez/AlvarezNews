@@ -5,7 +5,7 @@ app.config(function($routeProvider) {
 	}).when('/about', {
 		templateUrl: '/about.html',
 	}).when('/newLink', {
-		templateUrl: '/newLink.html',
+		templateUrl: '/newlink.html',
 	}).when('/myLinks', {
 		templateUrl: '/myLinks.html',
 	}).otherwise({
