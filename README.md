@@ -1,7 +1,7 @@
-<img src="https://alvareznews.herokuapp.com/img/logo_dark_github.png" alt="Drawing"/>
+<a href="https://adalvarez.github.io/AlvarezNews/"><img src="https://alvareznews.herokuapp.com/img/logo_dark_github.png" alt="Drawing"/></a>
 
 # AlvarezNews
-This repository is the result of the acquired knowledge in GraphQL, and is a web page like HackerNews.
+This repository is the result of the acquired knowledge in GraphQL, and is a web page like HackerNews. [**About**](https://adalvarez.github.io/AlvarezNews/)
 
 ## What is it?
 
