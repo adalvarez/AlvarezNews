@@ -42,7 +42,7 @@
 				<a class="w3-bar-item w3-button bar-hover w3-bottombar w3-hover-border w3-right" ng-hide="index.isLog" ng-click="index.modal = true" ><i class="fa fa-sign-in-alt"></i></a>
 				<a class="w3-bar-item w3-button bar-hover w3-bottombar w3-hover-border w3-right" ng-show="index.isLog" ng-click="index.signOut()"><i class="fa fa-sign-out-alt"></i></a>
 				<a class="w3-bar-item w3-hover-none w3-right w3-hide-small" ng-click="index.showSearcher=!index.showSearcher;"><i class="fa fa-search"></i></a>
-				<a class="w3-bar-item w3-hover-none w3-right w3-show-small" ><i class="fa fa-search"></i></a>
+				<a class="w3-bar-item w3-hover-none w3-right w3-show-small" ng-click="index.modalSearch=!index.modalSearch;"><i class="fa fa-search"></i></a>
 				<div id="search" class="w3-hide-small w3-animate-opacity" ng-show="index.showSearcher">
 					<input class="w3-right margin-search" type="text" name="search" placeholder="Search..." ng-model="index.searcher">
 				</div>
@@ -84,6 +84,24 @@
 						<input type="password" placeholder="Password" ng-model="index.signPassword" required>
 						<div class="w3-center">
 							<button class="w3-button dark-primary-color w3-round w3-text-white sign-hover">Sign up</button>
+						</div>
+					</form>
+
+				</div>
+				<br>
+			</div>
+		</div>
+
+		<div id="sign" class="w3-modal" ng-class="(index.modalSearch)?'ui-on':'ui-off'">
+			<div class="w3-modal-content">
+				<span ng-click="index.modalSearch=false" class="w3-button w3-display-topright">&times;</span>
+				<br>
+				<div class="w3-container padding-side-modal padding-modal-small">
+					<br>
+					<form ng-submit="index.signin()">
+						<input class="w3-right margin-search" type="text" name="search" placeholder="Search..." ng-model="index.searcher">
+						<div class="w3-center">
+							<button type="submit" class="w3-button dark-primary-color w3-round w3-text-white sign-hover" ng-click="index.modalSearch=false">Search</button>
 						</div>
 					</form>
 

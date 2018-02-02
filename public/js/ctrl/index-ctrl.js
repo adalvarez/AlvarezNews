@@ -80,20 +80,24 @@ app.controller('index-ctrl', function($http, $window, $location, $timeout, links
 	index.goANews = ()=>{
 		$location.path('links');
 		index.currentSection = linksFactory.setCurrentSection(0);
+		index.searcher = "";
 	}
 
 	index.goAbout = ()=>{
 		$location.path('about');
 		index.currentSection = linksFactory.setCurrentSection(1);
+		index.searcher = "";
 	}
 
 	index.goNewLink = ()=>{
 		$location.path('newLink');
 		index.currentSection = linksFactory.setCurrentSection(2);
+		index.searcher = "";
 	}
 
 	index.goMyLinks = ()=>{
 		$location.path('myLinks');
 		index.currentSection = linksFactory.setCurrentSection(3);
+		index.searcher = "";
 	}
 });
