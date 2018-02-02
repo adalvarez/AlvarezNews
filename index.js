@@ -12,7 +12,7 @@ const schema = require('./schema/main');
 const Models = require('./models/');
 
 // Constants
-const PORT = 8040;
+const PORT =  process.env.PORT || 8040;
 
 // Server
 const app = new express();
