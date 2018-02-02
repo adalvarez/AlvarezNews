@@ -18,6 +18,7 @@ app.controller('myLinks-ctrl', function($http, $location, $scope, linksFactory){
 	}
 
 	myLinks.deleteLink = (link)=>{
+		console.log("delete")
 		$http.post("/graphql",
 			{
 				query: GraphQL.mutations.deleteLink(link.id)

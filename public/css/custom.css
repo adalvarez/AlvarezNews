@@ -166,3 +166,40 @@
 .ui-off{
 	display: none;
 }
+
+#logo{
+	padding-bottom: 2px;
+}
+
+@media (max-width:600px){
+	.w3-show-small{
+		display:block!important
+	}
+	.footer-small{
+		font-size: 14px;
+	}
+	.padding-margin-small{
+		margin-left: 0%;
+		margin-right: 0%;
+		padding-left: 0%;
+		padding-right: 0%;
+	}
+	.padding-modal-small{
+		padding-left: 5%;
+		padding-right: 5%;
+	}
+	.about-logo{
+		width:6em;
+		height:3.9em; /* 65% of width*/
+	}
+	.about-title{
+		font-size: 20px;
+	}
+}
+
+
+@media (min-width:600px){
+	.w3-show-small{
+		display:none!important
+	}
+}
