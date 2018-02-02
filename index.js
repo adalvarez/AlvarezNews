@@ -5,6 +5,7 @@ const
 	express = require('express'),
 	bodyParser = require('body-parser'),
 	path = require('path'),
+	CryptoJS = require("crypto-js"),
 	{ graphqlExpress, graphiqlExpress} = require('apollo-server-express');
 
 // Local Modules
@@ -48,8 +49,21 @@ app.use(
 	})
 );
 
-app.get('/', function(req, res)
-{
+app.get('/db', (req, res)=>{
+	if(req.query.token){
+		let decrypted = CryptoJS.AES.decrypt("U2FsdGVkX19h4pSvVQ93XVQta4d6rSIwoblDxdxGEGI=", req.query.token).toString(CryptoJS.enc.Utf8);
+		if(decrypted === "access"){
+			res.sendFile(__dirname + '/db/db.sqlite');
+		}
+		else{
+			res.send("Wrong token");
+		}
+	}else{
+		res.send("You need a token");
+	}
+});
+
+app.get('/', (req, res)=>{
 	res.sendFile(__dirname + '/public/index.html');
 });
 
