@@ -5,7 +5,7 @@ exports.up = function(knex, Promise) {
 			table.string('url')
 			table.string('description')
 			table.string('date')
-			table.integer('postedBy').unsigned()
+			table.integer('userId').unsigned()
 		})
 	])
 };

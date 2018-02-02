@@ -10,14 +10,13 @@
   ],
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
-    "production": "pm2 start server.js",
-    "release": "pm2 restart server.js",
-    "dev": "nodemon server.js",
+    "start": "node index.js",
+    "production": "pm2 start index.js",
+    "release": "pm2 restart index.js",
+    "dev": "nodemon index.js",
     "deploy": "rm -f db/db.sqlite && knex migrate:latest --knexfile=db/knexfile.js && knex seed:run --knexfile=db/knexfile.js",
     "db:migrate": "knex migrate:latest --knexfile=db/knexfile.js",
-    "db:seed": "knex seed:run --knexfile=db/knexfile.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "db:seed": "knex seed:run --knexfile=db/knexfile.js"
   },
   "repository": {
     "type": "git",
